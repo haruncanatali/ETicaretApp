@@ -1,0 +1,52 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2 class="text-center h2">Anasayfa</h2>
+<hr />
+<div class="row d-flex justify-content-center">
+    <div class="card mt-2" style="width: 16rem; height: 150px; background-color: #6ab04c; display:inline-block; margin-left:30px;">
+        <div class="card-body">
+            <h4 class="h4 text-white">Toplam Müşteri Sayısı</h4>
+            <h4 class="h4 text-white" style="text-align:end;">@ViewBag.musteriSayisi</h4>
+        </div>
+    </div>
+    <div class="card mt-2" style="margin-left: 10px; width: 16rem; height: 150px; background-color: #eb4d4b; display:inline-block;">
+        <div class="card-body">
+            <h4 class="h4 text-white">Toplam Kategori Sayısı</h4>
+            <h4 class="h4 text-white" style="text-align:end;">@ViewBag.kategoriSayisi</h4>
+        </div>
+    </div>
+
+    <div class="card mt-2" style="margin-left: 10px; width: 16rem; height: 150px; background-color: #130f40; display: inline-block;">
+        <div class="card-body">
+            <h4 class="h4 text-white">Toplam Marka Sayısı</h4>
+            <h4 class="h4 text-white" style="text-align:end;">@ViewBag.markaSayisi</h4>
+        </div>
+    </div>
+
+</div>
+
+<div class="row d-flex justify-content-center">
+    <div class="card mt-2" style="width: 16rem; height: 150px; background-color: #6ab04c; display:inline-block; margin-left:30px;">
+        <div class="card-body">
+            <h4 class="h4 text-white">Toplam Ürün Sayısı</h4>
+            <h4 class="h4 text-white" style="text-align:end;">@ViewBag.urunSayisi</h4>
+        </div>
+    </div>
+    <div class="card mt-2" style="margin-left: 10px; width: 16rem; height: 150px; background-color: #eb4d4b; display: inline-block;">
+        <div class="card-body">
+            <h4 class="h4 text-white">Toplam Alışveriş Sayısı</h4>
+            <h4 class="h4 text-white" style="text-align:end;">@ViewBag.alisverisSayisi</h4>
+        </div>
+    </div>
+
+    <div class="card mt-2" style="margin-left: 10px; width: 16rem; height: 150px; background-color: #130f40; display: inline-block;">
+        <div class="card-body">
+            <h4 class="h4 text-white">Kasa</h4>
+            <h4 class="h4 text-white" style="text-align:end;">@ViewBag.kasa&nbsp;TL</h4>
+        </div>
+    </div>
+</div>
+

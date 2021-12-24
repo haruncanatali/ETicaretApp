@@ -1,0 +1,29 @@
+﻿@model ETicaretApp.Models.AlisverisDto
+@{
+    ViewBag.Title = "Update";
+}
+
+<h2 class="h2 text-center mt-2">Alışveriş Güncelleme Sayfası</h2>
+<hr />
+<div style="margin-left: 10px;">
+    @using (Html.BeginForm("Update", "Alisveris", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+        @Html.HiddenFor(c=>c.Id)
+        @Html.HiddenFor(c=>c.MusteriId)
+        @Html.HiddenFor(c=>c.UrunId)
+        <br />
+        <div class="row">
+            <div class="col-md-4">
+                <label><span class="h4">Miktar</span></label>
+                @Html.TextBoxFor(c => c.Miktar, new { @class = "form-control mt-3", @style = "width:300px;" })
+                @Html.ValidationMessageFor(c => c.Miktar, null, new { @class = "text-danger" })
+            </div>
+        </div>
+        <br />
+        <div class="row d-flex justify-content-center">
+            <button type="submit" class="btn btn-primary mt-2" style="width: 200px;">Güncelle</button>
+        </div>
+    }
+</div>
+

@@ -1,0 +1,64 @@
+﻿@model List<ETicaretApp.Models.Musteri>
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2 class="text-center h2 mt-5">Müşteriler Sayfası</h2>
+<hr />
+@if (Model.Count == 0)
+{
+    <div class="alert alert-danger" role="alert">
+        Sisteme kayıtlı müşteri bulunamadı.
+        <a href="/Musteri/Add" class="btn btn-primary">Ekle</a>
+    </div>
+}
+else
+{
+    <div class="row mt-2 mb-2">
+        <form action="/Musteri/Index" method="get">
+            <input type="text" id="val" name="val" class="form-control" style="float: left; width: 90%; margin-left: 10px;" placeholder="Müşteri Adı Soyadı Örn. Hasan Duran" />
+            <input type="submit" class="btn btn-success btn-sm" value="Ara" style="float: left; margin-top: 3px; margin-left: 3px;" />
+            <a href="/Musteri/Add" class="btn btn-primary btn-sm" style="float: left; width: 50px; margin-top: 3px; margin-left: 3px;">Ekle</a>
+        </form>
+    </div>
+    <table class="table table-bordered table-striped">
+        <thead>
+        <th>#</th>
+        <th>Ad</th>
+        <th>Soyad</th>
+        <th>TC Kimlik No</th>
+        <th>Unvan</th>
+        <th>Mail</th>
+        <th>Telefon</th>
+        <th>Sepet ID</th>
+        <th>Veritabanı İşlemleri</th>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.Id.ToString()</td>
+                    <td>@item.Ad</td>
+                    <td>@item.Soyad</td>
+                    <td>@item.Tckn</td>
+                    <td>@item.Unvan</td>
+                    <td>@item.Mail</td>
+                    <td>@item.Telefon</td>
+                    <td>@item.Sepeti.First().Id</td>
+                    <td class="text-center">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <a class="btn btn-warning btn-sm" href="/Musteri/Update/@item.Id" style="width: 70px;">Güncelle</a>
+                            </div>
+                            <div class="col-md-4 d-flex justify-content-center">
+                                <a class="btn btn-danger btn-sm" href="/Musteri/Delete/@item.Id" style="width: 100px;">Sil</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+}
+

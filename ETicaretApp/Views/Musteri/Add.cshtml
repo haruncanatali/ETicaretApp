@@ -1,0 +1,53 @@
+﻿@model ETicaretApp.Models.Musteri
+@{
+    ViewBag.Title = "Add";
+}
+
+<h2 class="h2 text-center mt-2">Müşteri Ekleme Sayfası</h2>
+<hr />
+<div style="margin-left: 10px;">
+    @using (Html.BeginForm("Add", "Musteri", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+        <br />
+        <div class="row">
+            <div class="col-md-4">
+                <label><span class="h4">Ad</span></label>
+                @Html.TextBoxFor(c => c.Ad, new { @class = "form-control mt-3", @style = "width:300px;" })
+                @Html.ValidationMessageFor(c => c.Ad, null, new { @class = "text-danger" })
+            </div>
+            <div class="col-md-4">
+                <label><span class="h4">Soyad</span></label>
+                @Html.TextBoxFor(c => c.Soyad, new { @class = "form-control mt-3", @style = "width:300px;" })
+                @Html.ValidationMessageFor(c => c.Soyad, null, new { @class = "text-danger" })
+            </div>
+            <div class="col-md-4">
+                <label><span class="h4">TC Kimlik No</span></label>
+                @Html.TextBoxFor(c => c.Tckn, new { @class = "form-control mt-3", @style = "width:300px;" })
+                @Html.ValidationMessageFor(c => c.Tckn, null, new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="row mt-3">
+            <div class="col-md-4">
+                <label><span class="h4">Unvan</span></label>
+                @Html.TextBoxFor(c => c.Unvan, new { @class = "form-control mt-3", @style = "width:300px;" })
+                @Html.ValidationMessageFor(c => c.Unvan, null, new { @class = "text-danger" })
+            </div>
+            <div class="col-md-4">
+                <label><span class="h4">Mail</span></label>
+                @Html.TextBoxFor(c => c.Mail, new { @class = "form-control mt-3", @style = "width:300px;" })
+                @Html.ValidationMessageFor(c => c.Mail, null, new { @class = "text-danger" })
+            </div>
+            <div class="col-md-4">
+                <label><span class="h4">Telefon</span></label>
+                @Html.TextBoxFor(c => c.Telefon, new { @class = "form-control mt-3", @style = "width:300px;" })
+                @Html.ValidationMessageFor(c => c.Telefon, null, new { @class = "text-danger" })
+            </div>
+        </div>
+        <br />
+        <div class="row d-flex justify-content-center">
+            <button type="submit" class="btn btn-primary mt-2" style="width: 200px;">Ekle</button>
+        </div>
+    }
+</div>
+
