@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Web;
@@ -14,7 +15,7 @@ namespace ETicaretApp.DbAccess.Concrete
         {
             using (ETicaretAppDbContext context = new ETicaretAppDbContext())
             {
-                return context.Tbl_Kategori.FirstOrDefault(filter);
+                return context.Tbl_Kategori.Include(c=>c.Urunleri).FirstOrDefault(filter);
             }
         }
 
@@ -22,7 +23,7 @@ namespace ETicaretApp.DbAccess.Concrete
         {
             using (ETicaretAppDbContext context = new ETicaretAppDbContext())
             {
-                return filter == null ? context.Tbl_Kategori.ToList() : context.Tbl_Kategori.Where(filter).ToList();
+                return filter == null ? context.Tbl_Kategori.Include(c=>c.Urunleri).ToList() : context.Tbl_Kategori.Include(c=>c.Urunleri).Where(filter).ToList();
             }
         }
     }

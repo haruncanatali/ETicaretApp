@@ -21,21 +21,25 @@ else
     </div>
     <table class="table table-bordered table-striped">
         <thead>
-            <tr>
-                <th>#</th>
-                <th>Müşteri Adı ve Soyadı</th>
-                <th>Müşteri TC Kimlik No</th>
-                <th>Toplam Fiyat</th>
-                <th>Alış Şekli</th>
-                <th>İndirim Oranı</th>
-                <th>Veritabanı İşlemleri</th>
-            </tr>
+        <tr>
+            <th>#</th>
+            <th>Müşteri Adı ve Soyadı</th>
+            <th>Müşteri TC Kimlik No</th>
+            <th>Toplam Fiyat</th>
+            <th>Alış Şekli</th>
+            <th>İndirim Oranı</th>
+            <th>Veritabanı İşlemleri</th>
+        </tr>
         </thead>
+        @{
+            int counter = 0;
+        }
         <tbody>
             @foreach (var item in Model)
             {
                 <tr>
-                    <td>@item.Id.ToString()</td>
+                    <td>@{ counter++;}
+                        @counter</td>
                     <td>@item.Musteri.Ad&nbsp;@item.Musteri.Soyad</td>
                     <td>@item.Musteri.Tckn</td>
                     <td>@item.ToplamFiyat.ToString()&nbsp;TL</td>

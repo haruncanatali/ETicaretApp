@@ -29,11 +29,15 @@ else
         <th>Sepet ID</th>
         <th>Veritabanı İşlemleri</th>
         </thead>
+        @{
+            int counter = 0;
+        }
         <tbody>
             @foreach (var item in Model)
             {
                 <tr>
-                    <td>@item.Id.ToString()</td>
+                    <td>@{ counter++;}
+                        @counter</td>
                     <td>@item.Urunu.UrunAdi</td>
                     <td>@item.Miktar.ToString()</td>
                     <td>@item.Sepeti.Id</td>

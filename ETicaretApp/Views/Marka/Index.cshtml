@@ -31,10 +31,14 @@ else
         </tr>
         </thead>
         <tbody>
+        @{
+            int counter = 0;
+        }
         @foreach (var item in Model)
         {
             <tr>
-                <td>@item.Id.ToString()</td>
+                <td>@{ counter++;}
+                    @counter</td>
                 <td>@item.MarkaAdi</td>
                 <td>@item.Urunleri.Count.ToString()</td>
                 <td class="text-center">

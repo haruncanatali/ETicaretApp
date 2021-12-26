@@ -34,10 +34,15 @@ else
         </tr>
         </thead>
         <tbody>
+        @{
+            int counter = 0;
+        }
         @foreach (var item in Model)
         {
             <tr>
-                <td>@item.Id.ToString()</td>
+                <td>@{
+                        counter++;
+                    }@counter</td>
                 <td>@item.UrunAdi</td>
                 <td>@item.Bedeni</td>
                 <td>@item.Fiyati.ToString("0.00")</td>
