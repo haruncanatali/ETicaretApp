@@ -6,7 +6,7 @@
 <h2 class="h2 text-center mt-2">Müşteri Ekleme Sayfası</h2>
 <hr />
 <div style="margin-left: 10px;">
-    @using (Html.BeginForm("Add", "Musteri", FormMethod.Post))
+    @using (Html.BeginForm("Add", "Musteri", FormMethod.Post, new { @id = "musteriEkleForm" }))
     {
         @Html.AntiForgeryToken()
         <br />
@@ -23,8 +23,7 @@
             </div>
             <div class="col-md-4">
                 <label><span class="h4">TC Kimlik No</span></label>
-                @Html.TextBoxFor(c => c.Tckn, new { @class = "form-control mt-3", @style = "width:300px;" })
-                @Html.ValidationMessageFor(c => c.Tckn, null, new { @class = "text-danger" })
+                <input class="form-control" id="Tckn" name="Tckn" value="@Model.Tckn" style="width: 300px;" minlength="11" maxlength="11" />
             </div>
         </div>
         <div class="row mt-3">
@@ -40,14 +39,27 @@
             </div>
             <div class="col-md-4">
                 <label><span class="h4">Telefon</span></label>
-                @Html.TextBoxFor(c => c.Telefon, new { @class = "form-control mt-3", @style = "width:300px;" })
-                @Html.ValidationMessageFor(c => c.Telefon, null, new { @class = "text-danger" })
+                <input class="form-control" id="Telefon" name="Telefon" value="@Model.Telefon" style="width: 300px;"  />
             </div>
         </div>
         <br />
+
         <div class="row d-flex justify-content-center">
-            <button type="submit" class="btn btn-primary mt-2" style="width: 200px;">Ekle</button>
+            <a class="btn btn-primary mt-2" onclick="$ekleBtn()" style="width: 200px;">Ekle</a>
         </div>
     }
 </div>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script>
+    $ekleBtn = function () {
+        var tclen = document.getElementById('Tckn').value.length;
+        var tellen = document.getElementById('Telefon').value.length;
+        if (tclen === 11 && tellen === 11) {
+            $("#musteriEkleForm").submit();
+        } else {
+            swal("Doğrulama Hatası", "TC Kimlik NO / Telefon alanları 11 haneden oluşmak zorundadır.", "error");
+        }
+    }
+</script>
+
 
