@@ -44,7 +44,8 @@ namespace ETicaretApp.Controllers
             try
             {
                 kategoriServis.Add(model);
-                return RedirectToAction("Index", kategoriServis.GetEntities(null));
+                ViewBag.msg = true;
+                return View("Index", kategoriServis.GetEntities(null));
             }
             catch (Exception e)
             {

@@ -43,7 +43,8 @@ namespace ETicaretApp.Controllers
             try
             {
                 markaServis.Add(model);
-                return RedirectToAction("Index", markaServis.GetEntities(null));
+                ViewBag.msg = true;
+                return View("Index", markaServis.GetEntities(null));
             }
             catch (Exception e)
             {

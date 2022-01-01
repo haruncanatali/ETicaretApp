@@ -60,7 +60,9 @@ namespace ETicaretApp.Controllers
                         MusteriId = result.Id
                     });
                 }
-                return RedirectToAction("Index", musteriServis.GetEntities(null));
+
+                ViewBag.msg = true;
+                return View("Index", musteriServis.GetEntities(null));
             }
             catch (Exception e)
             {

@@ -1,4 +1,5 @@
-﻿@model List<ETicaretApp.Models.Urun>
+﻿@using System.Web.UI.WebControls
+@model List<ETicaretApp.Models.Urun>
 @{
     ViewBag.Title = "Index";
 }
@@ -23,29 +24,31 @@ else
     </div>
     <table class="table table-bordered table-striped">
         <thead>
-        <tr>
-            <th>#</th>
-            <th>Ürün Adı</th>
-            <th>Bedeni</th>
-            <th>Fiyatı</th>
-            <th>Kategorisi</th>
-            <th>Markası</th>
-            <th>Veritabanı İşlemleri</th>
-        </tr>
+            <tr>
+                <th>#</th>
+                <th>Ürün Adı</th>
+                <th>Bedeni</th>
+                <th>Fiyatı</th>
+                <th>Kategorisi</th>
+                <th>Markası</th>
+                <th>Veritabanı İşlemleri</th>
+            </tr>
         </thead>
         <tbody>
-        @{
-            int counter = 0;
-        }
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>@{
-                        counter++;
-                    }@counter</td>
+            @{
+                int counter = 0;
+            }
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @{
+                            counter++;
+                    }@counter
+                </td>
                 <td>@item.UrunAdi</td>
                 <td>@item.Bedeni</td>
-                <td>@item.Fiyati.ToString("0.00")</td>
+                <td>@item.Fiyati.ToString("0.00")&nbsp;TL</td>
                 <td>@item.Kategorisi.KategoriAdi</td>
                 <td>@item.Markasi.MarkaAdi</td>
                 <td class="text-center">
@@ -54,7 +57,7 @@ else
                             <a class="btn btn-warning btn-sm" href="/Urun/Update/@item.Id" style="width: 70px;">Güncelle</a>
                         </div>
                         <div class="col-md-4 d-flex justify-content-center">
-                            <a class="btn btn-danger btn-sm" href="/Urun/Delete/@item.Id" style="width: 100px;">Sil</a>
+                            <a class="btn btn-danger btn-sm" onclick="$silBtn(@item.Id)" style="width: 100px;">Sil</a>
                         </div>
                     </div>
                 </td>
@@ -63,4 +66,35 @@ else
         </tbody>
     </table>
 }
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+@if (ViewBag.msg!=null && ViewBag.msg == true)
+{
+    <script>
+        swal("Ekleme başarılı oldu", "Ürün eklendi", "success");
+    </script>
+}
+
+<script>
+    $silBtn = function(id) {
+        swal({
+            title: "Emin misiniz?",
+            text: "Eğer silerseniz bu işlem geri alınamaz!",
+            icon: "warning",
+            buttons: true,
+            buttons: ["Hayır", "Evet"],
+            dangerMode: true,
+        }).then((willDelete) => {
+            if (willDelete) {
+                window.location.href = '@Url.Action("Delete","Urun")/' + id;
+                swal("Ürün silindi.",
+                    {
+                        icon: "success",
+                    });
+            } else {
+                swal("Silme işlemi iptal edildi.");
+            }
+        });
+    };
+</script>
 

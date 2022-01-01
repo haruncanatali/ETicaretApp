@@ -64,7 +64,8 @@ namespace ETicaretApp.Controllers
             try
             {
                 urunServis.Add(model);
-                return RedirectToAction("Index", urunServis.GetEntities(null));
+                ViewBag.msg = true;
+                return View("Index", urunServis.GetEntities(null));
             }
             catch (Exception e)
             {

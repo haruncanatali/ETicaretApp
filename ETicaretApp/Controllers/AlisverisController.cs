@@ -93,10 +93,11 @@ namespace ETicaretApp.Controllers
                             sepet.ToplamFiyat += fiyat*model.Miktar;
                         }
                         sepetServis.Update(sepet);
+                        ViewBag.msg = true;
                     }
                 }
 
-                return RedirectToAction("Index", alisverisServis.GetEntities(null));
+                return View("Index", alisverisServis.GetEntities(null));
             }
             catch (Exception e)
             {

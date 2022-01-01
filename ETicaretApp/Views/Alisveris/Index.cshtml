@@ -36,25 +36,57 @@ else
             @foreach (var item in Model)
             {
                 <tr>
-                    <td>@{ counter++;}
-                        @counter</td>
-                    <td>@item.Urunu.UrunAdi</td>
-                    <td>@item.Miktar.ToString()</td>
-                    <td>@item.Sepeti.Id</td>
-                    <td class="text-center">
-                        <div class="row">
-                            <div class="col-md-4">
-                                <a class="btn btn-warning btn-sm" href="/Alisveris/Update/@item.Id" style="width: 70px;">Güncelle</a>
-                            </div>
-                            <div class="col-md-4 d-flex justify-content-center">
-                                <a class="btn btn-danger btn-sm" href="/Alisveris/Delete/@item.Id" style="width: 100px;">Sil</a>
-                            </div>
+                    <td>
+                        @{ counter++;}
+                    @counter
+                </td>
+                <td>@item.Urunu.UrunAdi</td>
+                <td>@item.Miktar.ToString()</td>
+                <td>@item.Sepeti.Id</td>
+                <td class="text-center">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <a class="btn btn-warning btn-sm" href="/Alisveris/Update/@item.Id" style="width: 70px;">Güncelle</a>
                         </div>
-                    </td>
-                </tr>
-            }
+                        <div class="col-md-4 d-flex justify-content-center">
+                            <a class="btn btn-danger btn-sm" onclick="$silBtn(@item.Id)" style="width: 100px;">Sil</a>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+        }
         </tbody>
     </table>
 
 }
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+@if (ViewBag.msg != null && ViewBag.msg == true)
+{
+    <script>
+        swal("Ekleme başarılı oldu", "Alışveriş eklendi", "success");
+    </script>
+}
+<script>
+    $silBtn = function(id) {
+        swal({
+            title: "Emin misiniz?",
+            text: "Eğer silerseniz bu işlem geri alınamaz!",
+            icon: "warning",
+            buttons: true,
+            buttons: ["Hayır", "Evet"],
+            dangerMode: true,
+        }).then((willDelete) => {
+            if (willDelete) {
+                window.location.href = '@Url.Action("Delete","Alisveris")/' + id;
+                swal("Alışveriş silindi.",
+                    {
+                        icon: "success",
+                    });
+            } else {
+                swal("Silme işlemi iptal edildi.");
+            }
+        });
+    };
+</script>
 

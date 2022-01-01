@@ -23,38 +23,70 @@ else
     </div>
     <table class="table table-bordered table-striped">
         <thead>
-        <tr>
-            <th>#</th>
-            <th>Kategori Adı</th>
-            <th>Kategoriye Ait Ürün Sayısı</th>
-            <th>Veritabanı İşlemleri</th>
-        </tr>
+            <tr>
+                <th>#</th>
+                <th>Kategori Adı</th>
+                <th>Kategoriye Ait Ürün Sayısı</th>
+                <th>Veritabanı İşlemleri</th>
+            </tr>
         </thead>
         <tbody>
-        @{
-            int counter = 0;
-        }
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>@{
-                        counter++;
-                    }@counter</td>
-                <td>@item.KategoriAdi</td>
-                <td>@item.Urunleri.Count.ToString()</td>
-                <td class="text-center">
-                    <div class="row">
-                        <div class="col-md-4">
-                            <a class="btn btn-warning btn-sm" href="/Kategori/Update/@item.Id" style="width: 70px;">Güncelle</a>
+            @{
+                int counter = 0;
+            }
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @{
+                            counter++;
+                        }@counter
+                    </td>
+                    <td>@item.KategoriAdi</td>
+                    <td>@item.Urunleri.Count.ToString()</td>
+                    <td class="text-center">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <a class="btn btn-warning btn-sm" href="/Kategori/Update/@item.Id" style="width: 70px;">Güncelle</a>
+                            </div>
+                            <div class="col-md-4 d-flex justify-content-center">
+                                <a class="btn btn-danger btn-sm" onclick="$silBtn(@item.Id)" style="width: 100px;">Sil</a>
+                            </div>
                         </div>
-                        <div class="col-md-4 d-flex justify-content-center">
-                            <a class="btn btn-danger btn-sm" href="/Kategori/Delete/@item.Id" style="width: 100px;">Sil</a>
-                        </div>
-                    </div>
-                </td>
-            </tr>
-        }
+                    </td>
+                </tr>
+            }
         </tbody>
     </table>
 }
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+@if (ViewBag.msg != null && ViewBag.msg == true)
+{
+    <script>
+        swal("Ekleme başarılı oldu", "Kategori eklendi", "success");
+    </script>
+}
+<script>
+    $silBtn = function(id) {
+        swal({
+            title: "Emin misiniz?",
+            text: "Eğer silerseniz bu işlem geri alınamaz!",
+            icon: "warning",
+            buttons: true,
+            buttons: ["Hayır", "Evet"],
+            dangerMode: true,
+        }).then((willDelete) => {
+            if (willDelete) {
+                window.location.href = '@Url.Action("Delete","Kategori")/' + id;
+                swal("Kategori silindi.",
+                    {
+                        icon: "success",
+                    });
+            } else {
+                swal("Silme işlemi iptal edildi.");
+            }
+        });
+    };
+</script>
 
